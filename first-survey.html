@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles\main-style.css">
+  <link rel="stylesheet" href="styles\mobile-responsiveness.css">
+  <link rel="stylesheet" href="styles\survey.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <title>UB 360</title>
+</head>
+<style>
+  .survey-options ul li, div#backtohome, .exit-container, button#nextPageBtn{
+    cursor: pointer;
+  }
+</style>
+<body>
+  <aside class="sidebar-container">
+    <div class="sidebar sidebar-hidden">
+      <div class="sidebar-logo-container">
+        <img src="img\ub360-logo.png" alt="" class="ub-small-logo">
+      </div>
+      <ul class="sidebar-menu">
+        <a href="index.html"><li class="sidebar-items">Home</li></a>
+        <a href="../UB360-Website\facility-tour\facility-carousel.html"><li class="sidebar-items">Facility Tour</li></a>
+        <a href="about-page.html"><li class="sidebar-items">About Page</li></a>
+      </ul>
+    </div>
+  </aside>
+  <main class="main-container">
+    <div class="navbar-container">
+      <div class="ub360-logo-container">
+        <img src="img\ub360-logo.png" alt="" class="ub-small-logo">
+      </div>
+      <div class="sidebar-btn-container">
+        <svg viewBox="0 0 24 24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" id="toggle"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
+      </div>
+      <div class="desktop-navbar-container">
+        <ul class="navbar-menu">
+          <a href="index.html"><li class="navbar-items">Home</li></a>
+          <a href="../UB360-Website\facility-tour\facility-carousel.html"><li class="navbar-items">Facility Tour</li></a>
+          <a href="about-page.html"><li class="navbar-items">About Page</li></a>
+        </ul>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="pagination-section">
+        <div class="chevron-left-container" id="backtohome">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="35" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>          
+        </div>
+        <div class="pagination-wrap">
+          <span>1 of 3</span>
+        </div>
+        <div class="exit-container">
+          <svg viewBox="0 0 24 24" width="35" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="pagination-box">
+        <div class="first-box"></div>
+        <div class="second-box" style="visibility: hidden;"></div>
+        <div class="third-box" style="visibility: hidden;"></div>
+      </div>
+      <div class="survey-header">
+        <div class="survey-title">How can we help you during your visit?</div>
+        <div class="survey-subtitle">I am a/an</div>
+      </div>
+      <div class="survey-options">
+        <ul>
+          <li>Prospective Student</li>
+          <li>Current UBLC Student</li>
+          <li>Parent of Prospective Students</li>
+          <li>Alumni</li>
+          <li>Guest</li>
+        </ul>
+      </div>
+      <div class="footer-container">
+        <button class="next-btn" id="nextPageBtn">Next</button>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // sidebar
+    $("#toggle").click(function() {
+      $(".sidebar").toggleClass("sidebar-hidden");
+    });
+    // next page
+    $('#nextPageBtn').click(function() {
+      window.location.href = "second-survey.html";
+    });
+    // back to home/exit
+    $("#backtohome, .exit-container").click(function() {
+      window.location.href = "index.html";
+    });
+  });
+</script>
+<script src="scripts/function.js"></script>
+</html>

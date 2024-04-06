@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles\main-style.css">
+  <link rel="stylesheet" href="styles\mobile-responsiveness.css">
+  <link rel="stylesheet" href="styles\survey.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>UB 360</title>
+</head>
+<style>
+  div#backtofirst-survey, .exit-container, select#regionDropdown, select#provinceDropdown, select#cityDropdown, button#goToFacilityCarousel, button.skip-btn{
+    cursor: pointer;
+  }
+</style>
+<body>
+  <aside class="sidebar-container">
+    <div class="sidebar sidebar-hidden">
+      <div class="sidebar-logo-container">
+        <img src="img\ub360-logo.png" alt="" class="ub-small-logo">
+      </div>
+      <ul class="sidebar-menu">
+        <a href="index.html"><li class="sidebar-items">Home</li></a>
+        <a href="../UB360-Website\facility-tour\facility-carousel.html"><li class="sidebar-items">Facility Tour</li></a>
+        <a href="about-page.html"><li class="sidebar-items">About Page</li></a>
+      </ul>
+    </div>
+  </aside>
+  <main class="main-container">
+    <div class="navbar-container">
+      <div class="ub360-logo-container">
+        <img src="img\ub360-logo.png" alt="" class="ub-small-logo">
+      </div>
+      <div class="sidebar-btn-container">
+        <svg viewBox="0 0 24 24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" id="toggle"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
+      </div>
+      <div class="desktop-navbar-container">
+        <ul class="navbar-menu">
+          <a href="index.html"><li class="navbar-items">Home</li></a>
+          <a href="../UB360-Website\facility-tour\facility-carousel.html"><li class="navbar-items">Facility Tour</li></a>
+          <a href="about-page.html"><li class="navbar-items">About Page</li></a>
+        </ul>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="pagination-section">
+        <div class="chevron-left-container" id="backtofirst-survey">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="35" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>          
+        </div>
+        <div class="pagination-wrap">
+          <span>3 of 3</span>
+        </div>
+        <div class="exit-container">
+          <svg viewBox="0 0 24 24" width="35" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="pagination-box">
+        <div class="first-box"></div>
+        <div class="second-box" style="visibility: visible;"></div>
+        <div class="third-box"></div>
+      </div>
+      <div class="survey-header">
+        <div class="survey-title">Tell us where you from</div>
+      </div>
+      <div class="search-and-footer-container">
+        <div class="philippine-address-selection">
+          <select id="regionDropdown" class="location-dropdown">
+            <option value="">Select Region</option>
+          </select>
+        
+          <select id="provinceDropdown" class="location-dropdown">
+            <option value="">Select Province</option>
+          </select>
+        
+          <select id="cityDropdown" class="location-dropdown">
+            <option value="">Select City</option>
+          </select>
+        </div>
+        <div class="footer-container">
+          <button class="next-btn" id="goToFacilityCarousel">Next</button>
+          <a href="../UB360-Website\facility-tour\facility-carousel.html"><button class="skip-btn">Skip</button></a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // sidebar
+    $("#toggle").click(function() {
+      $(".sidebar").toggleClass("sidebar-hidden");
+    });
+    // next page
+    $('#nextPageBtn').click(function() {
+      window.location.href = "second-survey.html";
+    });
+    // back to home/exit
+    $("#backtohome, .exit-container").click(function() {
+      window.location.href = "index.html";
+    });
+    $("#backtofirst-survey").click(function() {
+      window.location.href = "first-survey.html";
+    });
+  });
+
+
+
+
+
+  fetch('philippines-master/regions.json')
+    .then(response => response.json())
+    .then(regions => {
+      const regionDropdown = document.getElementById('regionDropdown');
+      regions.forEach(region => {
+        const option = document.createElement('option');
+        option.value = region.key;
+        option.textContent = region.name;
+        regionDropdown.appendChild(option);
+      });
+    })
+    .catch(error => console.error('Error fetching regions JSON:', error));
+
+  function populateProvinces(regionKey) {
+    fetch('philippines-master/provinces.json')
+      .then(response => response.json())
+      .then(provinces => {
+        const provinceDropdown = document.getElementById('provinceDropdown');
+        provinceDropdown.innerHTML = '<option value="">Select Province</option>';
+        const filteredProvinces = provinces.filter(province => province.region === regionKey);
+        filteredProvinces.forEach(province => {
+          const option = document.createElement('option');
+          option.value = province.key;
+          option.textContent = province.name;
+          provinceDropdown.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error fetching provinces JSON:', error));
+  }
+
+  function populateCities(provinceKey) {
+    fetch('philippines-master/cities.json')
+      .then(response => response.json())
+      .then(cities => {
+        const cityDropdown = document.getElementById('cityDropdown');
+        cityDropdown.innerHTML = '<option value="">Select City</option>';
+        const filteredCities = cities.filter(city => city.province === provinceKey);
+        filteredCities.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city.name;
+          option.textContent = city.name;
+          cityDropdown.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error fetching cities JSON:', error));
+  }
+
+  document.getElementById('regionDropdown').addEventListener('change', function(event) {
+    const regionKey = event.target.value;
+    if (regionKey) {
+      populateProvinces(regionKey);
+    } else {
+      document.getElementById('provinceDropdown').innerHTML = '<option value="">Select Province</option>';
+      document.getElementById('cityDropdown').innerHTML = '<option value="">Select City</option>';
+    }
+  });
+
+  document.getElementById('provinceDropdown').addEventListener('change', function(event) {
+    const provinceKey = event.target.value;
+    if (provinceKey) {
+      populateCities(provinceKey);
+    } else {
+      document.getElementById('cityDropdown').innerHTML = '<option value="">Select City</option>';
+    }
+  });
+</script>
+<script src="scripts/function.js"></script>
+</html>
