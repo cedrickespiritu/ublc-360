@@ -1,0 +1,109 @@
+*{
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	font-family: Myriad Pro;
+}
+.main-content {
+    background-color: white;
+}
+.navbar-container {
+    border-bottom: 1px solid #c7c7c7;
+}
+.main-content {
+    justify-content: normal !important;
+}
+.pagination-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0px;
+}
+.pagination-wrap {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+}
+.pagination-box {
+    width: 95%;
+    background-color: #c5c5c5;
+    height: 5px;
+    border-radius: 20px;
+    display: flex;
+}
+.first-box {
+    width: 33%;
+    background-color: #951313;
+    height: 5px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.survey-header {
+    width: 100%;
+}
+.survey-options ul li:hover{
+    background: #eaeaea;
+}
+
+/* second survey */
+.second-box {
+    width: 33%;
+    background-color: #951313;
+    height: 5px;
+}
+.search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+input#facility-search {
+    height: 50px;
+    width: 30rem;
+    font-size: 25px;
+    padding: 0px 20px;
+    margin: 20px;
+    border-radius: 15px;
+}
+input#facility-search:focus-visible {
+    border: 1px solid;
+    outline: none;
+}
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 80%;
+}
+button.skip-btn {
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    font-size: 15px;
+}
+
+/* third page */
+.third-box {
+    width: 35%;
+    background-color: #951313;
+    height: 5px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.philippine-address-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+}
+select.location-dropdown {
+    text-align: center;
+    width: 80%;
+    height: 40px;
+    font-size: 15px;
+}
+select.location-dropdown:focus-visible{
+    outline: none;
+}

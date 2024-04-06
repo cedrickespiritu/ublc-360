@@ -1,0 +1,56 @@
+.main-card {
+    max-width: 500px;
+}   
+.main-content {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-radius: 40px;
+    margin-bottom: 10px;
+    height: min-content;
+    padding: 30px;
+}
+.main-content {
+    margin-top: 70px;
+}
+@media (max-width:500px){ 
+    .main-content {
+        border-radius: 0;
+    }
+    .main-content {
+        height: 100% !important;
+    }
+    
+}
+@media (max-height:1000px){ 
+    .main-content {
+        height: max-content;
+        padding: 30px;
+        overflow-y: auto;
+    }
+    .main-content {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+main.main-container {
+    justify-content: normal;
+}
+
+
+/* second survey mobile responsiveness */
+.search-and-footer-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+    align-items: center;
+}
+button.next-btn {
+    width: 60%;
+}
+.footer-container {
+    align-items: center;
+    width: 80%;
+}
