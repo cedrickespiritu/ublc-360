@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--projecttitle--><title>UBLC-Facilities</title><!--projecttitle-end-->
+		<!--projectdescription--><meta name="description" content="Baruuuuurururuurru"><!--projectdescription-end-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
+		
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<!-- Insert this line above script imports  -->
+		<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+		
+		<script src="imagedata.js"></script>
+		<script src="jquery.js"></script>
+		<script src="three.min.js"></script>
+		<script src="panolens.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- Insert this line after script imports -->
+		<script>if (window.module) module = window.module;</script>
+		
+		<style>
+		
+			
+						
+			/* SCROLLBAR STYLING */
+			/* width */
+			::-webkit-scrollbar {
+				width: 0.25em;
+				height: 0.25em;
+			}
+			/* Track */
+			::-webkit-scrollbar-track {
+				background: #2c3643; 
+			}
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+				background: #0d9e59; 
+				transition: background .5s;
+			}
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+				background: #00e075; 
+			}
+
+
+			html, body {
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				background-color: #000;
+				color: black;
+			}
+
+			a:link, a:visited{
+				color: #bdc3c7;	
+			}
+
+			.fullwrapper{
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: black;
+			}
+			
+			#container {
+                width: 100%;
+                height: 100%;
+            }
+			
+			#tmp{
+				position: fixed;
+				top: 0;
+				left: 0; 
+				right: 0;
+				bottom: 0;
+				padding: 3em;
+				background-color: rgba(0,0,0,.5);
+				backdrop-filter: blur(5px);
+				display: none;
+			}
+			.facility-list-background {
+				background-color: rgb(50 50 50 / 50%);
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				z-index: 9;
+			}
+			.facility-info-main-container {
+				background-color: white;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				padding: 15px;
+				border-radius: 25px;
+				max-width: 500px;
+    			width: 80%;
+				max-height: 500px;
+    			overflow-y: auto;
+				z-index: 10;
+			}
+			ul.facility-list-ul li {
+				list-style: none;
+				padding: 9px;
+				font-size: 17px;
+				display: flex;
+				gap: 15px;
+				align-items: center;
+				justify-content: space-between;
+				border: 1px solid #d9d9d9;
+   			 	margin-bottom: 10px;
+				border-radius: 7px;
+			}
+			span.facility-list-btn {
+				font-size: 12px;
+				padding: 8px 13px;
+				display: flex;
+				background: #862633;
+				color: white;
+				justify-content: center;
+				border-radius: 7px;
+				height: 30px;
+				text-wrap: nowrap;
+			}
+			.facility-list-title {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				text-align: center;
+				padding: 0px 15px;
+			}
+			ul.facility-list-ul {
+				min-height: 240px;
+				overflow-y: auto;
+				margin-top: 6px;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #8a8a8a;
+				transition: background .5s;
+			}
+
+			::-webkit-scrollbar-track {
+				background: #cacaca;
+			}
+			span.exit-btn {
+				background: #cccccc;
+				border-radius: 7px;
+				display: flex;
+				padding: 0px 5px;
+			}
+			span.facility-title-span {
+				font-size: 23px;
+				font-weight: 500;
+				text-align: left;
+			}
+			.hidden{
+				display: none;
+			}
+			.building-navigation-container {
+				background-color: #f6f5f3;
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				bottom: 30px;
+				height: 55px;
+				width: 50%;
+				display: flex;
+				justify-content: center;
+				border-radius: 10px;
+				align-items: center;
+				padding: 5px 9px;
+				gap: 10px;
+				max-width: 500px;
+			}
+			.building-navigation-container span {
+				height: 20px;
+				width: 100%;
+				background-color: #d9d9d9;
+				padding: 20px;
+				display: flex;
+				align-items: center;
+				border-radius: 5px;
+				justify-content: center;
+				cursor: pointer;
+			}
+			.not-available{
+				display: none !important;
+			}
+			.facility-list-container {
+				width: 95%;
+				margin-left: auto;
+				margin-right: auto;
+				overflow-y: auto;
+				padding: 0px 10px 10px 10px;
+				margin-top: 15px;
+				max-height: 420px;
+			}
+			img#threesixty-gif{
+				width: 100px;
+				position: fixed;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				bottom: 90px;
+			}
+			.facility-list-btn, span.exit-btn{
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body id="body">
+		<aside class="sidebar-container">
+			<div class="sidebar sidebar-hidden">
+			<div class="sidebar-logo-container">
+				<img src="../img/ub360-logo.png" alt="" class="ub-small-logo">
+			</div>
+			<ul class="sidebar-menu">
+				<a href="../../index.html"><li class="sidebar-items">Home</li></a>
+				<a href="..\facility-carousel.html"><li class="sidebar-items">Facility Tour</li></a>
+				<a href="../../about-page.html"><li class="sidebar-items">About Page</li></a>
+			</ul>
+			</div>
+		</aside>
+		<div class="main-container">
+			<div class="navbar-container">
+			<div class="ub360-logo-container">
+				<img src="../img/ub360-logo.png" alt="" class="ub-small-logo">
+			</div>
+			<div class="sidebar-btn-container">
+				<svg viewBox="0 0 24 24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" id="toggle"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
+			</div>
+			<div class="desktop-navbar-container">
+				<ul class="navbar-menu">
+				<a href="../../index.html"><li class="navbar-items">Home</li></a>
+				<a href="..\facility-carousel.html"><li class="navbar-items">Facility Tour</li></a>
+				<a href="../../about-page.html"><li class="navbar-items">About Page</li></a>
+				</ul>
+			</div>
+			</div>
+		</div>
+		<div class="gif-container">
+			<img src="..\img/360viewpro.gif" id="threesixty-gif">
+		</div>
+		<div class="facility-list-background hidden">
+		</div>
+		<div class="facility-info-main-container hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Facility Title</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<ul class="facility-list-ul">
+					<li><span>Lorem Ipusm</span><span class="facility-list-btn">View 360</span></li>
+					<li><span>Lorem Ipusm</span><span class="facility-list-btn">View 360</span></li>
+					<li><span>Lorem Ipusm</span><span class="facility-list-btn">View 360</span></li>
+					<li><span>Lorem Ipusm</span><span class="facility-list-btn">View 360</span></li>
+					<li><span>Lorem Ipusm</span><span class="facility-list-btn">View 360</span></li>
+				</ul>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container select-building hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Select Building</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Building A</span><span class="facility-list-btn" id="buildingA">View 360</span></li>
+						<li><span>Building B</span><span class="facility-list-btn" id="buildingB">View 360</span></li>
+						<li><span>Building C</span><span class="facility-list-btn" id="buildingC">View 360</span></li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+		<div class="facility-info-main-container building-a-first-list hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building A 1st Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+					<li><span>Computer Laboratory 1</span><span class="facility-list-btn" id="comlab-btn1">View 360</span></li>
+					<li><span>Computer Laboratory 2</span><span class="facility-list-btn not-available">View 360</span></li>
+					<li><span>CopWell</span><span class="facility-list-btn not-available">View 360</span></li>
+					<li><span>Testing Room</span><span class="facility-list-btn" id="testing-room">View 360</span></li>
+					<li><span>Moot Court</span><span class="facility-list-btn" id="moot-court">View 360</span></li>
+					<li><span>Deans Office</span><span class="facility-list-btn not-available">View 360</span></li>
+					<li><span>Comfort Room</span><span class="facility-list-btn not-available">View 360</span></li>
+					<li><span>Research Public Office</span><span class="facility-list-btn not-available">View 360</span></li>
+					<li><span>Dental Clinic</span><span class="facility-list-btn not-available">View 360</span></li>
+				</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+
+
+		<div class="facility-info-main-container building-a-second-list hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building A 1st Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>Admission and Scholarship Office</li>
+						<li>HRD Office</li>
+						<li>Office of the President Emeritus</li>
+						<li>ITC Data Center</li>
+						<li>Executice Office</li>
+						<li>A-Ante Room</li>
+						<li>Office of the Chairman</li>
+						<li>Board Room</li>
+						<li>Office of the President</li>
+						<li>Board Room</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+
+		<div class="facility-info-main-container building-a-registrar hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building A 1st Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+					<li>Registrar</li>
+					<li>Accounting Office</li>
+				</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container building-a2-right hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building A 2nd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Physics Laboratory</span><span class="facility-list-btn" id="psychics-lab">View 360</span></li>
+						<li>Deans Office CEAS</li>
+						<li><span>Chemistry Laboratory</span><span class="facility-list-btn" id="chem-lab">View 360</span></li>
+						<li>Comfort Room</li>
+						<li>Chemical Room</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container building-a2-left hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building A 2nd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Biology Laboratory</span><span class="facility-list-btn" id="bio-lab">View 360</span></li>
+						<li>CCJE Dean's Office</li>
+						<li><span>Crime Scene Plaza</span><span class="facility-list-btn" id="crimesceneplaza">View 360</span></li>
+						<li><span>Criminology Lab 2</span><span class="facility-list-btn" id="crimlab2">View 360</span></li>
+						<li>Comfort Room</li>
+						<li><span>Ballistic Room</span><span class="facility-list-btn" id="ballistic-room">View 360</span></li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+		<div class="facility-info-main-container building-a3-left hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building A 3rd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Ed Tech Room</span><span class="facility-list-btn" id="edtech">View 360</span></li>
+						<li><span>Audio Visual Room</span><span class="facility-list-btn" id="avroom">View 360</span></li>
+						<li><span>Psychology Lab 1</span><span class="facility-list-btn" id="psychlab">View 360</span></li>
+						<li>Psychology Lab 2</li>
+						<li>Psychology Lab 3</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container building-a3-right hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building A 3rd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>New Network Lab</span><span class="facility-list-btn" id="netlab">View 360</span></li>
+						<li>Comfort Room</li>
+						<li><span>Multimedia Arts Lab</span><span class="facility-list-btn" id="mma-lab">View 360</span></li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container study-area-list hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Study Area</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>Study Area</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+
+		<div class="facility-info-main-container building-b1-right hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building B 1st Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>Alumni Relation & Placement Office</li>
+						<li>High School Learning Resource Center</li>
+						<li>Community Extensions Office</li>
+						<li>High School Lrc</li>
+						<li>Registrar's Document Room</li>
+						<li>Internship Office</li>
+						<li>CorpCom Office</li>
+						<li>SAEP Office</li>
+						<li><span>Home Economics Lab</span><span class="facility-list-btn" id="homeEconomics">View 360</span></li>
+						<li>Health Services Office</li>
+						<li>Comfort Room</li>
+						<li>Donning and Doffing</li>
+						<li>Isolation Room 2</li>
+						<li>ITC CSD</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+		
+
+		<div class="facility-info-main-container building-mags hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building B 1st Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>Department of Military Science and Tactics Office</li>
+						<li>Building and Maintenance Department</li>
+						<li>MAGS Office</li>
+						<li>MAGS Officer Office</li>
+						<li>PE Coordinators Office</li>
+						<li>Sports Dev't Office</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bb2floor-left hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building B 2nd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Regular Room</span><span class="facility-list-btn" id="regular-room">View 360</span></li>
+						<li>Comfort Room</li>
+						<li>College Student Government</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bb2floor-right hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building B 2nd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>Office of the Principal High School Department</li>
+						<li>Junior High School Faculty Office</li>
+						<li>Comfort Room</li>
+						<li>High School SG</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bb3floor-right hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building B 3rd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Drawing Lab 1</span><span class="facility-list-btn" id="drawinglab1">View 360</span></li>
+						<li>Comfort Room</li>
+						<li>Drawing Lab 2</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bb3floor-left hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building 3rd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>Senior High School Faculty Office</li>
+						<li>Comfort Room</li>
+						<li>The Brahmans' Journal Office</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bc1floor-left hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building C 1st Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>CMT Program Head's Office</li>
+						<li>CMT Dean's Office</li>
+						<li>CMT Simulation Room 1</li>
+						<li>CMT Faculty Office</li>
+						<li>CMT Simulation Room 2</li>
+						<li>Citec Faculty Office</li>
+						<li>Citec Dean's Office</li>
+						<li>Faculty Lounge</li>
+						<li>Cenar Dean's Office</li>
+						<li>Cenar Faculty Office</li>
+						<li>ITC Room</li>
+						<li>Comfort Room</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+
+		<div class="facility-info-main-container bc1floor-right hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building C 1st Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Center For Business and Innovation</span><span class="facility-list-btn" id="cbi-office">View 360</span></li>
+						<li>CMT Consultation</li>
+						<li>Buon Viaggio Travel and Tours</li>
+						<li>Ante Room</li>
+						<li>Accreditation Rom/Quality Assurance Room</li>
+						<li><span>Hotel Vivace</span><span class="facility-list-btn" id="hotelvivace">View 360</span></li>
+						<li>Comfort Room</li>
+						<li>Stanza Biancheria e Lavanderia</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+		
+		<div class="facility-info-main-container bc2floor-right hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building C 2nd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>Cucina Calda</li>
+						<li><span>Trattoria Lipeña</span><span class="facility-list-btn" id="trattoria">View 360</span></li>
+						<li>Cucina Fredda </li>
+						<li>Magazzino</li>
+						<li>Comfort Room</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bc2floor-left hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building C 2nd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Cold Kitchen</span><span class="facility-list-btn" id="coldkitchen">View 360</span></li>
+						<li><span>Regular Rooms</span><span class="facility-list-btn" id="regular-room-bc2">View 360</span></li>
+						<li>Cucina Calda</li>
+						<li>Comfort Room</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bc3floor-left hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building C 3rd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>Studio Room for Architecture</li>
+						<li><span>Drawing Lab 3</span><span class="facility-list-btn" id="drawingLab">View 360</span></li>
+						<li>Drawing Lab 4</li>
+						<li><span>Com Lab 5</span><span class="facility-list-btn" id="comlab5">View 360</span></li>
+						<li>Drawing Lab 5</li>
+						<li>Comfort Room</li>
+						<li>Engineering Tool Room</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bc3floor-right hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building C 3rd Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li>IE Laboratory</li>
+						<li>CpE Laboratory</li>
+						<li>Comfort Room</li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		<div class="facility-info-main-container bc4floor hidden">
+			<div class="facility-info-container">
+				<div class="facility-list-title">
+					<span class="facility-title-span">Building C 4th Floor</span>
+					<span class="exit-btn"><svg viewBox="0 0 24 24" width="25" height="35" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            		<path d="M18 6L6 18M6 6l12 12"></path>
+          			</svg></span>
+				</div>
+				<div class="facility-list-container">
+					<ul class="facility-list-ul">
+						<li><span>Multi Purpose Hall</span><span class="facility-list-btn" id="mphall">View 360</span></li>
+						<li><span>Tiered Hall</span><span class="facility-list-btn" id="tiered-hall">View 360</span></li>
+					</ul>	
+				</div>
+			</div>	
+		</div>
+
+
+		
+
+
+
+
+		<div class="buildings-navigation-main-container">
+			<div class="building-navigation-container">
+				<span id="gotoBA1">A</span>
+				<span id="gotoBB1">B</span>
+				<span id="gotoBC1">C</span>	
+			</div>
+		</div>
+	    <div id="container" style="color: black;"></div>
+    	
+		
+		
+		<div class='customhotspot' id='Afirstfloor'></div>
+		
+		<div id="tmp">
+			<div style="width: 100%; height: 100%; overflow: hidden; overflow-y: auto; box-sizing: border-box; position: relative;" id="tmpcontent"></div>
+			<div class="mediaclosebutton" onclick="hideTemp()"><i class="fa fa-times-circle"></i></div>
+		</div>
+
+
+		<div id="loading" class="fullwrapper" style="display: table; width: 100%; height: 100%;">
+    		<div style="display: table-cell; vertical-align: middle; text-align: center; color: white; font-size: 30px; padding: 50px;">
+    			<!--loadingtext-->Loading...<!--loadingtext-end-->
+    		</div>
+    	</div>
+		
+    	<script>
+			
+            var container = document.querySelector( '#container' );
+			/*panolens*/
+
+var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  output: 'console' , autoHideInfospot: false, } );
+
+/*panolens-end*/
+			
+			viewer.addUpdateCallback(function(){});
+			
+			/*panoramas*/
+
+var Afirstfloor = new PANOLENS.ImagePanorama( "panoramas/Afirstfloor.jpg" );
+			Afirstfloor.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			Afirstfloor.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			Afirstfloor.addEventListener('click', function(e){
+			});
+
+
+var infospotAfirstfloor0 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+					infospotAfirstfloor0.position.set( 462.68, -1451.42, 4757.45 );
+					Afirstfloor.add(infospotAfirstfloor0);
+
+infospotAfirstfloor0.addEventListener('click', function(){
+
+});
+
+var infospotAfirstfloor1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotAfirstfloor1.position.set( 973.55, -502.88, -4872.38 );
+					Afirstfloor.add(infospotAfirstfloor1);
+
+infospotAfirstfloor1.addEventListener('click', function(){
+
+});
+
+var infospotAfirstfloor2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotAfirstfloor2.position.set( -1686.04, 140.32, -4695.28 );
+					Afirstfloor.add(infospotAfirstfloor2);
+
+infospotAfirstfloor2.addEventListener('click', function(){
+
+});
+
+var infospotAfirstfloor3 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+					infospotAfirstfloor3.position.set( 4860.18, 1115.77, -227.20 );
+					Afirstfloor.add(infospotAfirstfloor3);
+
+infospotAfirstfloor3.addEventListener('click', function(){
+
+ChangePanorama('BA2mid');
+
+});
+
+var infospotAfirstfloor4 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+					infospotAfirstfloor4.position.set( 4825.67, -459.73, 1192.15 );
+					Afirstfloor.add(infospotAfirstfloor4);
+
+infospotAfirstfloor4.addEventListener('click', function(){
+
+ChangePanorama('buildingBentrance');
+
+});
+
+var infospotAfirstfloor5 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+					infospotAfirstfloor5.position.set( -4901.59, -578.95, -731.59 );
+					Afirstfloor.add(infospotAfirstfloor5);
+
+infospotAfirstfloor5.addEventListener('click', function(){
+
+ChangePanorama('ub2ndstep');
+
+});
+
+viewer.add( Afirstfloor );
+
+var ub1ststep = new PANOLENS.ImagePanorama( "panoramas/ub1ststep.jpg" );
+			ub1ststep.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			ub1ststep.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			ub1ststep.addEventListener('click', function(e){
+			});
+
+
+var infospotub1ststep0 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+					infospotub1ststep0.position.set( -4920.45, -174.94, -808.06 );
+					ub1ststep.add(infospotub1ststep0);
+
+infospotub1ststep0.addEventListener('click', function(){
+
+ChangePanorama('ub2ndstep');
+
+});
+
+viewer.add( ub1ststep );
+
+var ub2ndstep = new PANOLENS.ImagePanorama( "panoramas/ub2ndstep.jpg" );
+			ub2ndstep.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			ub2ndstep.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			ub2ndstep.addEventListener('click', function(e){
+			});
+
+
+var infospotub2ndstep0 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+					infospotub2ndstep0.position.set( -4853.41, -571.44, 1037.59 );
+					ub2ndstep.add(infospotub2ndstep0);
+
+infospotub2ndstep0.addEventListener('click', function(){
+
+ChangePanorama('Afirstfloor');
+
+});
+
+var infospotub2ndstep1 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+					infospotub2ndstep1.position.set( 4978.22, 41.32, -384.51 );
+					ub2ndstep.add(infospotub2ndstep1);
+
+infospotub2ndstep1.addEventListener('click', function(){
+
+ChangePanorama('ub1ststep');
+
+});
+
+viewer.add( ub2ndstep );
+
+var BA1comlab = new PANOLENS.ImagePanorama( "panoramas/BA1comlab.jpg" );
+			BA1comlab.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BA1comlab.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BA1comlab.addEventListener('click', function(e){
+			});
+
+
+var infospotBA1comlab0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA1comlab0.position.set( -4881.96, -236.34, -1035.70 );
+					BA1comlab.add(infospotBA1comlab0);
+
+infospotBA1comlab0.addEventListener('click', function(){
+
+ChangePanorama('Afirstfloor');
+
+});
+
+viewer.add( BA1comlab );
+
+var BA1testingroom = new PANOLENS.ImagePanorama( "panoramas/BA1testingroom.jpg" );
+			BA1testingroom.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BA1testingroom.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BA1testingroom.addEventListener('click', function(e){
+			});
+
+
+var infospotBA1testingroom0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA1testingroom0.position.set( -3228.55, -535.99, 3768.89 );
+					BA1testingroom.add(infospotBA1testingroom0);
+
+infospotBA1testingroom0.addEventListener('click', function(){
+
+ChangePanorama('Afirstfloor');
+
+});
+
+viewer.add( BA1testingroom );
+
+var BA1mootcourt = new PANOLENS.ImagePanorama( "panoramas/BA1mootcourt.jpg" );
+			BA1mootcourt.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BA1mootcourt.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BA1mootcourt.addEventListener('click', function(e){
+			});
+
+
+var infospotBA1mootcourt0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA1mootcourt0.position.set( 3001.14, 173.86, 3985.93 );
+					BA1mootcourt.add(infospotBA1mootcourt0);
+
+infospotBA1mootcourt0.addEventListener('click', function(){
+
+ChangePanorama('Afirstfloor');
+
+});
+
+viewer.add( BA1mootcourt );
+
+var BA2mid = new PANOLENS.ImagePanorama( "panoramas/BA2mid.jpg" );
+			BA2mid.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BA2mid.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BA2mid.addEventListener('click', function(e){
+			});
+
+
+var infospotBA2mid0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA2mid0.position.set( -477.47, -1038.94, 4862.34 );
+					BA2mid.add(infospotBA2mid0);
+
+infospotBA2mid0.addEventListener('click', function(){
+
+});
+
+var infospotBA2mid1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA2mid1.position.set( 504.22, -1315.00, -4793.71 );
+					BA2mid.add(infospotBA2mid1);
+
+infospotBA2mid1.addEventListener('click', function(){
+
+});
+
+var infospotBA2mid2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA2mid2.position.set( -4781.24, 787.50, 1206.62 );
+					BA2mid.add(infospotBA2mid2);
+
+infospotBA2mid2.addEventListener('click', function(){
+
+ChangePanorama('BA3mid');
+
+});
+
+var infospotBA2mid3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA2mid3.position.set( -4638.74, -1140.39, -1467.58 );
+					BA2mid.add(infospotBA2mid3);
+
+infospotBA2mid3.addEventListener('click', function(){
+
+ChangePanorama('Afirstfloor');
+
+});
+
+viewer.add( BA2mid );
+
+var BA3mid = new PANOLENS.ImagePanorama( "panoramas/BA3mid.jpg" );
+			BA3mid.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BA3mid.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BA3mid.addEventListener('click', function(e){
+			});
+
+
+var infospotBA3mid0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA3mid0.position.set( -518.37, -1678.99, 4675.91 );
+					BA3mid.add(infospotBA3mid0);
+
+infospotBA3mid0.addEventListener('click', function(){
+
+});
+
+var infospotBA3mid1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA3mid1.position.set( 168.42, -884.25, -4909.31 );
+					BA3mid.add(infospotBA3mid1);
+
+infospotBA3mid1.addEventListener('click', function(){
+
+});
+
+var infospotBA3mid2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBA3mid2.position.set( 4682.83, -1644.48, 555.94 );
+					BA3mid.add(infospotBA3mid2);
+
+infospotBA3mid2.addEventListener('click', function(){
+
+ChangePanorama('BA2mid');
+
+});
+
+viewer.add( BA3mid );
+
+var buildingBentrance = new PANOLENS.ImagePanorama( "panoramas/buildingBentrance.jpg" );
+			buildingBentrance.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			buildingBentrance.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			buildingBentrance.addEventListener('click', function(e){
+			});
+
+
+var infospotbuildingBentrance0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotbuildingBentrance0.position.set( 4895.43, -240.06, 949.75 );
+					buildingBentrance.add(infospotbuildingBentrance0);
+
+infospotbuildingBentrance0.addEventListener('click', function(){
+
+ChangePanorama('Afirstfloor');
+
+});
+
+var infospotbuildingBentrance1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotbuildingBentrance1.position.set( -1024.28, -28.50, 4892.03 );
+					buildingBentrance.add(infospotbuildingBentrance1);
+
+infospotbuildingBentrance1.addEventListener('click', function(){
+
+});
+
+var infospotbuildingBentrance2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotbuildingBentrance2.position.set( 3257.77, -341.97, -3769.63 );
+					buildingBentrance.add(infospotbuildingBentrance2);
+
+infospotbuildingBentrance2.addEventListener('click', function(){
+
+});
+
+var infospotbuildingBentrance3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotbuildingBentrance3.position.set( -4862.42, -488.39, -1041.91 );
+					buildingBentrance.add(infospotbuildingBentrance3);
+
+infospotbuildingBentrance3.addEventListener('click', function(){
+
+ChangePanorama('BB1floor');
+
+});
+
+viewer.add( buildingBentrance );
+
+var BB1floor = new PANOLENS.ImagePanorama( "panoramas/BB1floor.jpg" );
+			BB1floor.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BB1floor.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BB1floor.addEventListener('click', function(e){
+			});
+
+
+var infospotBB1floor0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB1floor0.position.set( 4980.88, -400.67, 51.87 );
+					BB1floor.add(infospotBB1floor0);
+
+infospotBB1floor0.addEventListener('click', function(){
+
+ChangePanorama('buildingBentrance');
+
+});
+
+var infospotBB1floor1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB1floor1.position.set( 80.84, 277.76, -4984.85 );
+					BB1floor.add(infospotBB1floor1);
+
+infospotBB1floor1.addEventListener('click', function(){
+
+ChangePanorama('library');
+
+});
+
+var infospotBB1floor2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB1floor2.position.set( -4792.05, 1128.06, 830.49 );
+					BB1floor.add(infospotBB1floor2);
+
+infospotBB1floor2.addEventListener('click', function(){
+
+ChangePanorama('BB2floor');
+
+});
+
+var infospotBB1floor3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB1floor3.position.set( -735.23, -1142.39, 4804.25 );
+					BB1floor.add(infospotBB1floor3);
+
+infospotBB1floor3.addEventListener('click', function(){
+
+});
+
+var infospotBB1floor4 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB1floor4.position.set( -4830.02, -498.19, -1158.32 );
+					BB1floor.add(infospotBB1floor4);
+
+infospotBB1floor4.addEventListener('click', function(){
+
+ChangePanorama('canteenOutside');
+
+});
+
+viewer.add( BB1floor );
+
+var library = new PANOLENS.ImagePanorama( "panoramas/library.jpg" );
+			library.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			library.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			library.addEventListener('click', function(e){
+			});
+
+
+var infospotlibrary0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotlibrary0.position.set( -4972.32, -205.92, -373.84 );
+					library.add(infospotlibrary0);
+
+infospotlibrary0.addEventListener('click', function(){
+
+ChangePanorama('BB1floor');
+
+});
+
+viewer.add( library );
+
+var BB2floor = new PANOLENS.ImagePanorama( "panoramas/BB2floor.jpg" );
+			BB2floor.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BB2floor.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BB2floor.addEventListener('click', function(e){
+			});
+
+
+var infospotBB2floor0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB2floor0.position.set( -4457.84, -1114.81, -1964.04 );
+					BB2floor.add(infospotBB2floor0);
+
+infospotBB2floor0.addEventListener('click', function(){
+
+ChangePanorama('BB1floor');
+
+});
+
+var infospotBB2floor1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB2floor1.position.set( -4793.93, 818.32, 1135.60 );
+					BB2floor.add(infospotBB2floor1);
+
+infospotBB2floor1.addEventListener('click', function(){
+
+ChangePanorama('BB3floor');
+
+});
+
+var infospotBB2floor2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB2floor2.position.set( 790.62, -1230.44, -4772.46 );
+					BB2floor.add(infospotBB2floor2);
+
+infospotBB2floor2.addEventListener('click', function(){
+
+});
+
+var infospotBB2floor3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB2floor3.position.set( -892.47, -953.86, 4817.27 );
+					BB2floor.add(infospotBB2floor3);
+
+infospotBB2floor3.addEventListener('click', function(){
+
+});
+
+viewer.add( BB2floor );
+
+var BB3floor = new PANOLENS.ImagePanorama( "panoramas/BB3floor.jpg" );
+			BB3floor.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BB3floor.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BB3floor.addEventListener('click', function(e){
+			});
+
+
+var infospotBB3floor0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB3floor0.position.set( 4423.16, -1433.56, 1816.01 );
+					BB3floor.add(infospotBB3floor0);
+
+infospotBB3floor0.addEventListener('click', function(){
+
+ChangePanorama('BB2floor');
+
+});
+
+var infospotBB3floor1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB3floor1.position.set( -137.66, -1399.26, 4789.19 );
+					BB3floor.add(infospotBB3floor1);
+
+infospotBB3floor1.addEventListener('click', function(){
+
+});
+
+var infospotBB3floor2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBB3floor2.position.set( 887.14, -812.70, -4846.50 );
+					BB3floor.add(infospotBB3floor2);
+
+infospotBB3floor2.addEventListener('click', function(){
+
+});
+
+viewer.add( BB3floor );
+
+var canteenOutside = new PANOLENS.ImagePanorama( "panoramas/canteenOutside.jpg" );
+			canteenOutside.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			canteenOutside.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			canteenOutside.addEventListener('click', function(e){
+			});
+
+
+var infospotcanteenOutside0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcanteenOutside0.position.set( 4938.33, -237.49, 679.48 );
+					canteenOutside.add(infospotcanteenOutside0);
+
+infospotcanteenOutside0.addEventListener('click', function(){
+
+ChangePanorama('BB1floor');
+
+});
+
+var infospotcanteenOutside1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcanteenOutside1.position.set( -3132.62, -145.47, -3880.89 );
+					canteenOutside.add(infospotcanteenOutside1);
+
+infospotcanteenOutside1.addEventListener('click', function(){
+
+ChangePanorama('canteen');
+
+});
+
+var infospotcanteenOutside2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcanteenOutside2.position.set( -4081.70, -327.91, 2858.92 );
+					canteenOutside.add(infospotcanteenOutside2);
+
+infospotcanteenOutside2.addEventListener('click', function(){
+
+ChangePanorama('ubgymn');
+
+});
+
+var infospotcanteenOutside3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcanteenOutside3.position.set( -606.87, -98.44, 4955.36 );
+					canteenOutside.add(infospotcanteenOutside3);
+
+infospotcanteenOutside3.addEventListener('click', function(){
+
+ChangePanorama('BCfirststep');
+
+});
+
+viewer.add( canteenOutside );
+
+var canteen = new PANOLENS.ImagePanorama( "panoramas/canteen.jpg" );
+			canteen.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			canteen.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			canteen.addEventListener('click', function(e){
+			});
+
+
+var infospotcanteen0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcanteen0.position.set( 4976.68, -451.25, -17.82 );
+					canteen.add(infospotcanteen0);
+
+infospotcanteen0.addEventListener('click', function(){
+
+ChangePanorama('canteenOutside');
+
+});
+
+viewer.add( canteen );
+
+var ubgymn = new PANOLENS.ImagePanorama( "panoramas/ubgymn.jpg" );
+			ubgymn.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			ubgymn.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			ubgymn.addEventListener('click', function(e){
+			});
+
+
+var infospotubgymn0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotubgymn0.position.set( -4992.10, 120.28, -60.66 );
+					ubgymn.add(infospotubgymn0);
+
+infospotubgymn0.addEventListener('click', function(){
+
+ChangePanorama('canteen');
+
+});
+
+var infospotubgymn1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotubgymn1.position.set( 4217.73, -159.57, -2661.59 );
+					ubgymn.add(infospotubgymn1);
+
+infospotubgymn1.addEventListener('click', function(){
+
+ChangePanorama('BCfirststep');
+
+});
+
+viewer.add( ubgymn );
+
+var BCfirststep = new PANOLENS.ImagePanorama( "panoramas/BCfirststep.jpg" );
+			BCfirststep.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BCfirststep.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BCfirststep.addEventListener('click', function(e){
+			});
+
+
+var infospotBCfirststep0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBCfirststep0.position.set( 319.21, -261.77, 4972.99 );
+					BCfirststep.add(infospotBCfirststep0);
+
+infospotBCfirststep0.addEventListener('click', function(){
+
+});
+
+var infospotBCfirststep1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBCfirststep1.position.set( -894.46, -86.19, -4910.30 );
+					BCfirststep.add(infospotBCfirststep1);
+
+infospotBCfirststep1.addEventListener('click', function(){
+
+ChangePanorama('BCsecondstep');
+
+});
+
+var infospotBCfirststep2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBCfirststep2.position.set( 4997.55, -44.45, -13.40 );
+					BCfirststep.add(infospotBCfirststep2);
+
+infospotBCfirststep2.addEventListener('click', function(){
+
+ChangePanorama('canteenOutside');
+
+});
+
+viewer.add( BCfirststep );
+
+var BCsecondstep = new PANOLENS.ImagePanorama( "panoramas/BCsecondstep.jpg" );
+			BCsecondstep.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BCsecondstep.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BCsecondstep.addEventListener('click', function(e){
+			});
+
+
+var infospotBCsecondstep0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBCsecondstep0.position.set( 2119.68, 115.76, -4518.81 );
+					BCsecondstep.add(infospotBCsecondstep0);
+
+infospotBCsecondstep0.addEventListener('click', function(){
+
+ChangePanorama('ubgymn');
+
+});
+
+var infospotBCsecondstep1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBCsecondstep1.position.set( 4982.41, -98.86, 261.50 );
+					BCsecondstep.add(infospotBCsecondstep1);
+
+infospotBCsecondstep1.addEventListener('click', function(){
+
+ChangePanorama('BCfirststep');
+
+});
+
+var infospotBCsecondstep2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBCsecondstep2.position.set( -1068.97, -74.03, 4879.85 );
+					BCsecondstep.add(infospotBCsecondstep2);
+
+infospotBCsecondstep2.addEventListener('click', function(){
+
+ChangePanorama('BCentrance');
+
+});
+
+viewer.add( BCsecondstep );
+
+var BCentrance = new PANOLENS.ImagePanorama( "panoramas/BCentrance.jpg" );
+			BCentrance.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BCentrance.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BCentrance.addEventListener('click', function(e){
+			});
+
+
+var infospotBCentrance0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBCentrance0.position.set( 4990.66, 88.00, 112.22 );
+					BCentrance.add(infospotBCentrance0);
+
+infospotBCentrance0.addEventListener('click', function(){
+
+ChangePanorama('cfirstfloor');
+
+});
+
+var infospotBCentrance1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBCentrance1.position.set( 836.51, 74.65, -4919.93 );
+					BCentrance.add(infospotBCentrance1);
+
+infospotBCentrance1.addEventListener('click', function(){
+
+ChangePanorama('BCsecondstep');
+
+});
+
+viewer.add( BCentrance );
+
+var cfirstfloor = new PANOLENS.ImagePanorama( "panoramas/cfirstfloor.jpg" );
+			cfirstfloor.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			cfirstfloor.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			cfirstfloor.addEventListener('click', function(e){
+			});
+
+
+var infospotcfirstfloor0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcfirstfloor0.position.set( 4938.38, -496.41, 561.69 );
+					cfirstfloor.add(infospotcfirstfloor0);
+
+infospotcfirstfloor0.addEventListener('click', function(){
+
+ChangePanorama('BCentrance');
+
+});
+
+var infospotcfirstfloor1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcfirstfloor1.position.set( -1209.84, -449.59, -4822.17 );
+					cfirstfloor.add(infospotcfirstfloor1);
+
+infospotcfirstfloor1.addEventListener('click', function(){
+
+});
+
+var infospotcfirstfloor2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcfirstfloor2.position.set( -845.66, -1237.48, 4761.73 );
+					cfirstfloor.add(infospotcfirstfloor2);
+
+infospotcfirstfloor2.addEventListener('click', function(){
+
+});
+
+var infospotcfirstfloor3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcfirstfloor3.position.set( 2510.09, 590.84, -4277.24 );
+					cfirstfloor.add(infospotcfirstfloor3);
+
+infospotcfirstfloor3.addEventListener('click', function(){
+
+ChangePanorama('BC2floor');
+
+});
+
+viewer.add( cfirstfloor );
+
+var BC2floor = new PANOLENS.ImagePanorama( "panoramas/BC2floor.jpg" );
+			BC2floor.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BC2floor.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BC2floor.addEventListener('click', function(e){
+			});
+
+
+var infospotBC2floor0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC2floor0.position.set( 4438.31, -2270.17, -316.65 );
+					BC2floor.add(infospotBC2floor0);
+
+infospotBC2floor0.addEventListener('click', function(){
+
+ChangePanorama('cfirstfloor');
+
+});
+
+var infospotBC2floor1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC2floor1.position.set( -526.32, -1541.09, 4725.74 );
+					BC2floor.add(infospotBC2floor1);
+
+infospotBC2floor1.addEventListener('click', function(){
+
+});
+
+var infospotBC2floor2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC2floor2.position.set( 868.45, -1389.63, -4714.74 );
+					BC2floor.add(infospotBC2floor2);
+
+infospotBC2floor2.addEventListener('click', function(){
+
+});
+
+var infospotBC2floor3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC2floor3.position.set( 4545.04, 436.19, 2032.88 );
+					BC2floor.add(infospotBC2floor3);
+
+infospotBC2floor3.addEventListener('click', function(){
+
+ChangePanorama('BC3floor');
+
+});
+
+viewer.add( BC2floor );
+
+var BC3floor = new PANOLENS.ImagePanorama( "panoramas/BC3floor.jpg" );
+			BC3floor.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BC3floor.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BC3floor.addEventListener('click', function(e){
+			});
+
+
+var infospotBC3floor0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC3floor0.position.set( -940.63, -2280.26, 4347.86 );
+					BC3floor.add(infospotBC3floor0);
+
+infospotBC3floor0.addEventListener('click', function(){
+
+ChangePanorama('BC2floor');
+
+});
+
+var infospotBC3floor1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC3floor1.position.set( 4711.29, -1450.77, 780.17 );
+					BC3floor.add(infospotBC3floor1);
+
+infospotBC3floor1.addEventListener('click', function(){
+
+});
+
+var infospotBC3floor2 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC3floor2.position.set( -4704.01, -1539.47, -666.41 );
+					BC3floor.add(infospotBC3floor2);
+
+infospotBC3floor2.addEventListener('click', function(){
+
+});
+
+var infospotBC3floor3 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC3floor3.position.set( -4924.19, 445.45, -689.79 );
+					BC3floor.add(infospotBC3floor3);
+
+infospotBC3floor3.addEventListener('click', function(){
+
+ChangePanorama('BC4floor');
+
+});
+
+viewer.add( BC3floor );
+
+var BC4floor = new PANOLENS.ImagePanorama( "panoramas/BC4floor.jpg" );
+			BC4floor.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			BC4floor.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			BC4floor.addEventListener('click', function(e){
+			});
+
+
+var infospotBC4floor0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC4floor0.position.set( -2020.97, -150.82, -4566.27 );
+					BC4floor.add(infospotBC4floor0);
+
+infospotBC4floor0.addEventListener('click', function(){
+
+});
+
+var infospotBC4floor1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotBC4floor1.position.set( -3874.03, -983.61, -2988.90 );
+					BC4floor.add(infospotBC4floor1);
+
+infospotBC4floor1.addEventListener('click', function(){
+
+ChangePanorama('BC3floor');
+
+});
+
+viewer.add( BC4floor );
+
+var regularroom = new PANOLENS.ImagePanorama( "panoramas/regularroom.jpg" );
+			regularroom.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			regularroom.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			regularroom.addEventListener('click', function(e){
+			});
+
+
+var infospotregularroom0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotregularroom0.position.set( -2976.42, -346.03, 3997.25 );
+					regularroom.add(infospotregularroom0);
+
+infospotregularroom0.addEventListener('click', function(){
+
+});
+
+viewer.add( regularroom );
+
+var vivace = new PANOLENS.ImagePanorama( "panoramas/vivace.jpg" );
+			vivace.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			vivace.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			vivace.addEventListener('click', function(e){
+			});
+
+
+var infospotvivace0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotvivace0.position.set( 4960.57, -14.17, -595.07 );
+					vivace.add(infospotvivace0);
+
+infospotvivace0.addEventListener('click', function(){
+
+ChangePanorama('cfirstfloor');
+
+});
+
+var infospotvivace1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotvivace1.position.set( 3812.16, 501.31, -3181.63 );
+					vivace.add(infospotvivace1);
+
+infospotvivace1.addEventListener('click', function(){
+
+ChangePanorama('BC2floor');
+
+});
+
+viewer.add( vivace );
+
+var viaggio = new PANOLENS.ImagePanorama( "panoramas/viaggio.jpg" );
+			viaggio.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			viaggio.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			viaggio.addEventListener('click', function(e){
+			});
+
+
+var infospotviaggio0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotviaggio0.position.set( -969.82, -576.44, -4864.16 );
+					viaggio.add(infospotviaggio0);
+
+infospotviaggio0.addEventListener('click', function(){
+
+ChangePanorama('cfirstfloor');
+
+});
+
+viewer.add( viaggio );
+
+var tratoria = new PANOLENS.ImagePanorama( "panoramas/tratoria.jpg" );
+			tratoria.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			tratoria.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			tratoria.addEventListener('click', function(e){
+			});
+
+
+var infospottratoria0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospottratoria0.position.set( -3930.71, -115.38, 3072.97 );
+					tratoria.add(infospottratoria0);
+
+infospottratoria0.addEventListener('click', function(){
+
+ChangePanorama('BC2floor');
+
+});
+
+viewer.add( tratoria );
+
+var tieredhall = new PANOLENS.ImagePanorama( "panoramas/tieredhall.jpg" );
+			tieredhall.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			tieredhall.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			tieredhall.addEventListener('click', function(e){
+			});
+
+
+var infospottieredhall0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospottieredhall0.position.set( 3837.58, -3200.60, 23.29 );
+					tieredhall.add(infospottieredhall0);
+
+infospottieredhall0.addEventListener('click', function(){
+
+ChangePanorama('BC4floor');
+
+});
+
+var infospottieredhall1 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospottieredhall1.position.set( 4410.32, -774.91, 2209.09 );
+					tieredhall.add(infospottieredhall1);
+
+infospottieredhall1.addEventListener('click', function(){
+
+ChangePanorama('mph');
+
+});
+
+viewer.add( tieredhall );
+
+var psychlab = new PANOLENS.ImagePanorama( "panoramas/psychlab.jpg" );
+			psychlab.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			psychlab.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			psychlab.addEventListener('click', function(e){
+			});
+
+
+var infospotpsychlab0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotpsychlab0.position.set( 3577.95, 311.21, -3466.16 );
+					psychlab.add(infospotpsychlab0);
+
+infospotpsychlab0.addEventListener('click', function(){
+
+ChangePanorama('BA3mid');
+
+});
+
+viewer.add( psychlab );
+
+var netlab = new PANOLENS.ImagePanorama( "panoramas/netlab.jpg" );
+			netlab.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			netlab.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			netlab.addEventListener('click', function(e){
+			});
+
+
+var infospotnetlab0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotnetlab0.position.set( 4383.67, -17.45, 2393.42 );
+					netlab.add(infospotnetlab0);
+
+infospotnetlab0.addEventListener('click', function(){
+
+ChangePanorama('BA3mid');
+
+});
+
+viewer.add( netlab );
+
+var mph = new PANOLENS.ImagePanorama( "panoramas/mph.jpg" );
+			mph.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			mph.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			mph.addEventListener('click', function(e){
+			});
+
+
+var infospotmph0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotmph0.position.set( -4494.28, -153.48, 2164.56 );
+					mph.add(infospotmph0);
+
+infospotmph0.addEventListener('click', function(){
+
+ChangePanorama('tieredhall');
+
+});
+
+viewer.add( mph );
+
+var mmalab = new PANOLENS.ImagePanorama( "panoramas/mmalab.jpg" );
+			mmalab.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			mmalab.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			mmalab.addEventListener('click', function(e){
+			});
+
+
+viewer.add( mmalab );
+
+var hotkitchen = new PANOLENS.ImagePanorama( "panoramas/hotkitchen.jpg" );
+			hotkitchen.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			hotkitchen.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			hotkitchen.addEventListener('click', function(e){
+			});
+
+
+var infospothotkitchen0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospothotkitchen0.position.set( 2960.15, -609.17, 3975.11 );
+					hotkitchen.add(infospothotkitchen0);
+
+infospothotkitchen0.addEventListener('click', function(){
+
+ChangePanorama('BC2floor');
+
+});
+
+viewer.add( hotkitchen );
+
+var homeeconomics = new PANOLENS.ImagePanorama( "panoramas/homeeconomics.jpg" );
+			homeeconomics.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			homeeconomics.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			homeeconomics.addEventListener('click', function(e){
+			});
+
+
+var infospothomeeconomics0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospothomeeconomics0.position.set( 3959.67, -680.70, 2965.78 );
+					homeeconomics.add(infospothomeeconomics0);
+
+infospothomeeconomics0.addEventListener('click', function(){
+
+ChangePanorama('BB1floor');
+
+});
+
+viewer.add( homeeconomics );
+
+var homeeconomics3rCAu = new PANOLENS.ImagePanorama( "panoramas/homeeconomics3rCAu.jpg" );
+			homeeconomics3rCAu.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			homeeconomics3rCAu.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			homeeconomics3rCAu.addEventListener('click', function(e){
+			});
+
+
+viewer.add( homeeconomics3rCAu );
+
+var edtech = new PANOLENS.ImagePanorama( "panoramas/edtech.jpg" );
+			edtech.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			edtech.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			edtech.addEventListener('click', function(e){
+			});
+
+
+var infospotedtech0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotedtech0.position.set( 2542.49, -735.18, -4235.86 );
+					edtech.add(infospotedtech0);
+
+infospotedtech0.addEventListener('click', function(){
+
+ChangePanorama('BA3mid');
+
+});
+
+viewer.add( edtech );
+
+var drawinglab = new PANOLENS.ImagePanorama( "panoramas/drawinglab.jpg" );
+			drawinglab.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			drawinglab.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			drawinglab.addEventListener('click', function(e){
+			});
+
+
+var infospotdrawinglab0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdrawinglab0.position.set( -1434.47, -481.73, -4758.04 );
+					drawinglab.add(infospotdrawinglab0);
+
+infospotdrawinglab0.addEventListener('click', function(){
+
+ChangePanorama('BC3floor');
+
+});
+
+viewer.add( drawinglab );
+
+var drawinglab2 = new PANOLENS.ImagePanorama( "panoramas/drawinglab2.jpg" );
+			drawinglab2.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			drawinglab2.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			drawinglab2.addEventListener('click', function(e){
+			});
+
+
+var infospotdrawinglab20 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotdrawinglab20.position.set( -4421.15, -412.23, 2282.26 );
+					drawinglab2.add(infospotdrawinglab20);
+
+infospotdrawinglab20.addEventListener('click', function(){
+
+ChangePanorama('BB3floor');
+
+});
+
+viewer.add( drawinglab2 );
+
+var crimlab2 = new PANOLENS.ImagePanorama( "panoramas/crimlab2.jpg" );
+			crimlab2.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			crimlab2.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			crimlab2.addEventListener('click', function(e){
+			});
+
+
+var infospotcrimlab20 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcrimlab20.position.set( -2545.62, 137.86, -4294.05 );
+					crimlab2.add(infospotcrimlab20);
+
+infospotcrimlab20.addEventListener('click', function(){
+
+ChangePanorama('BA2mid');
+
+});
+
+viewer.add( crimlab2 );
+
+var criminologylab1 = new PANOLENS.ImagePanorama( "panoramas/criminologylab1.jpg" );
+			criminologylab1.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			criminologylab1.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			criminologylab1.addEventListener('click', function(e){
+			});
+
+
+var infospotcriminologylab10 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcriminologylab10.position.set( -3363.79, -302.02, -3680.83 );
+					criminologylab1.add(infospotcriminologylab10);
+
+infospotcriminologylab10.addEventListener('click', function(){
+
+ChangePanorama('BA2mid');
+
+});
+
+viewer.add( criminologylab1 );
+
+var crimesceneplaza = new PANOLENS.ImagePanorama( "panoramas/crimesceneplaza.jpg" );
+			crimesceneplaza.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			crimesceneplaza.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			crimesceneplaza.addEventListener('click', function(e){
+			});
+
+
+var infospotcrimesceneplaza0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcrimesceneplaza0.position.set( 4978.36, -117.59, 324.74 );
+					crimesceneplaza.add(infospotcrimesceneplaza0);
+
+infospotcrimesceneplaza0.addEventListener('click', function(){
+
+ChangePanorama('BA2mid');
+
+});
+
+viewer.add( crimesceneplaza );
+
+var comlab5 = new PANOLENS.ImagePanorama( "panoramas/comlab5.jpg" );
+			comlab5.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			comlab5.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			comlab5.addEventListener('click', function(e){
+			});
+
+
+var infospotcomlab50 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcomlab50.position.set( 1989.91, -468.35, -4558.41 );
+					comlab5.add(infospotcomlab50);
+
+infospotcomlab50.addEventListener('click', function(){
+
+ChangePanorama('BC3floor');
+
+});
+
+viewer.add( comlab5 );
+
+var coldkitchen = new PANOLENS.ImagePanorama( "panoramas/coldkitchen.jpg" );
+			coldkitchen.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			coldkitchen.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			coldkitchen.addEventListener('click', function(e){
+			});
+
+
+var infospotcoldkitchen0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcoldkitchen0.position.set( 1828.96, -439.56, 4623.84 );
+					coldkitchen.add(infospotcoldkitchen0);
+
+infospotcoldkitchen0.addEventListener('click', function(){
+
+ChangePanorama('BC2floor');
+
+});
+
+viewer.add( coldkitchen );
+
+var chemistrylab = new PANOLENS.ImagePanorama( "panoramas/chemistrylab.jpg" );
+			chemistrylab.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			chemistrylab.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			chemistrylab.addEventListener('click', function(e){
+			});
+
+
+var infospotchemistrylab0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotchemistrylab0.position.set( -1120.69, -1151.80, 4729.34 );
+					chemistrylab.add(infospotchemistrylab0);
+
+infospotchemistrylab0.addEventListener('click', function(){
+
+ChangePanorama('BA2mid');
+
+});
+
+viewer.add( chemistrylab );
+
+var cbi = new PANOLENS.ImagePanorama( "panoramas/cbi.jpg" );
+			cbi.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			cbi.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			cbi.addEventListener('click', function(e){
+			});
+
+
+var infospotcbi0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotcbi0.position.set( -4767.38, -671.67, 1312.88 );
+					cbi.add(infospotcbi0);
+
+infospotcbi0.addEventListener('click', function(){
+
+ChangePanorama('cfirstfloor');
+
+});
+
+viewer.add( cbi );
+
+var biologylab = new PANOLENS.ImagePanorama( "panoramas/biologylab.jpg" );
+			biologylab.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			biologylab.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			biologylab.addEventListener('click', function(e){
+			});
+
+
+var infospotbiologylab0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotbiologylab0.position.set( 114.28, -836.94, -4921.56 );
+					biologylab.add(infospotbiologylab0);
+
+infospotbiologylab0.addEventListener('click', function(){
+
+ChangePanorama('BA2mid');
+
+});
+
+viewer.add( biologylab );
+
+var ballistic = new PANOLENS.ImagePanorama( "panoramas/ballistic.jpg" );
+			ballistic.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			ballistic.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			ballistic.addEventListener('click', function(e){
+			});
+
+
+var infospotballistic0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotballistic0.position.set( -4893.16, -907.89, -386.93 );
+					ballistic.add(infospotballistic0);
+
+infospotballistic0.addEventListener('click', function(){
+
+ChangePanorama('BA2mid');
+
+});
+
+viewer.add( ballistic );
+
+var avr = new PANOLENS.ImagePanorama( "panoramas/avr.jpg" );
+			avr.addEventListener('progress', function(e){
+				$("#loading").show();
+			});
+			avr.addEventListener('load', function(e){
+				//$("#loading").fadeOut();
+			});
+			avr.addEventListener('click', function(e){
+			});
+
+
+var infospotavr0 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+					infospotavr0.position.set( -4659.36, 126.78, 1781.09 );
+					avr.add(infospotavr0);
+
+infospotavr0.addEventListener('click', function(){
+
+ChangePanorama('BA3mid');
+
+});
+
+viewer.add( avr );
+
+$(document).ready(function(){ ChangePanorama('ub1ststep'); });
+
+
+/*panoramas-end*/
+            
+			
+			function hideTemp(){
+				$("#tmp").fadeOut();
+				setTimeout(function(){
+					$("#tmpcontent").html("");
+				},1000);
+			}
+			
+			function showMedia(type, content){
+				switch(type){
+					case 1 :
+						//Image
+						$("#tmpcontent").html("<img src='"+content+"' style='width: 100%;'>");
+						$("#tmp").fadeIn();
+						break;
+					case 2 :
+						//Video
+						$("#tmpcontent").html("<video id='webvideo' controls autoplay style='width: 100%; height: 100%;'><source src='" +content+ "' type='video/mp4'> Your browser does not support the video tag. </video>");
+						$("#tmp").fadeIn();
+						break;
+					case 3 :
+						//Audio
+						$("#tmpcontent").html("<audio controls style='width: 100%;'><source src='"+content+"' type='audio/ogg'>Your browser does not support the audio tag.</audio>");
+						$("#tmp").fadeIn();
+						break;
+					case 4 :
+						//PDF
+						$("#tmpcontent").html("<iframe src='pdfjs/web/viewer.html?file=../../"+content+"' style='width: 100%; height: 99%;'></iframe>");
+						$("#tmp").fadeIn();
+						break;
+				}
+			}
+			
+			
+			
+			//Update Callback
+			viewer.addUpdateCallback(function(){
+				
+				/*viewerupdatecallback*/
+if(viewer.panorama == Afirstfloor){
+}
+
+if(viewer.panorama == ub1ststep){
+}
+
+if(viewer.panorama == ub2ndstep){
+}
+
+if(viewer.panorama == BA1comlab){
+}
+
+if(viewer.panorama == BA1testingroom){
+}
+
+if(viewer.panorama == BA1mootcourt){
+}
+
+if(viewer.panorama == BA2mid){
+}
+
+if(viewer.panorama == BA3mid){
+}
+
+if(viewer.panorama == buildingBentrance){
+}
+
+if(viewer.panorama == BB1floor){
+}
+
+if(viewer.panorama == library){
+}
+
+if(viewer.panorama == BB2floor){
+}
+
+if(viewer.panorama == BB3floor){
+}
+
+if(viewer.panorama == canteenOutside){
+}
+
+if(viewer.panorama == canteen){
+}
+
+if(viewer.panorama == ubgymn){
+}
+
+if(viewer.panorama == BCfirststep){
+}
+
+if(viewer.panorama == BCsecondstep){
+}
+
+if(viewer.panorama == BCentrance){
+}
+
+if(viewer.panorama == cfirstfloor){
+}
+
+if(viewer.panorama == BC2floor){
+}
+
+if(viewer.panorama == BC3floor){
+}
+
+if(viewer.panorama == BC4floor){
+}
+
+if(viewer.panorama == regularroom){
+}
+
+if(viewer.panorama == vivace){
+}
+
+if(viewer.panorama == viaggio){
+}
+
+if(viewer.panorama == tratoria){
+}
+
+if(viewer.panorama == tieredhall){
+}
+
+if(viewer.panorama == psychlab){
+}
+
+if(viewer.panorama == netlab){
+}
+
+if(viewer.panorama == mph){
+}
+
+if(viewer.panorama == mmalab){
+}
+
+if(viewer.panorama == hotkitchen){
+}
+
+if(viewer.panorama == homeeconomics){
+}
+
+if(viewer.panorama == homeeconomics3rCAu){
+}
+
+if(viewer.panorama == edtech){
+}
+
+if(viewer.panorama == drawinglab){
+}
+
+if(viewer.panorama == drawinglab2){
+}
+
+if(viewer.panorama == crimlab2){
+}
+
+if(viewer.panorama == criminologylab1){
+}
+
+if(viewer.panorama == crimesceneplaza){
+}
+
+if(viewer.panorama == comlab5){
+}
+
+if(viewer.panorama == coldkitchen){
+}
+
+if(viewer.panorama == chemistrylab){
+}
+
+if(viewer.panorama == cbi){
+}
+
+if(viewer.panorama == biologylab){
+}
+
+if(viewer.panorama == ballistic){
+}
+
+if(viewer.panorama == avr){
+}
+/*viewerupdatecallback-end*/
+				
+				
+			});
+			
+			
+			
+			var hotspotsvisible = true;
+			function ShowMyInfospot(hs, elid){
+				var thehs = toScreenPosition(hs);
+				if(thehs.z < 1){
+					$("#" + elid).css({
+						"top" : (thehs.y - ($("#" + elid).height()/2)) + "px",
+						"left" : (thehs.x - ($("#" + elid).width()/2)) + "px",
+					});
+					if(hotspotsvisible)
+						$("#" + elid).show();
+				}else{
+					$("#" + elid).hide();
+				}
+				
+			}
+			
+			function toScreenPosition(obj)
+			{
+				var vector = new THREE.Vector3();
+				var widthHalf = 0.5 * innerWidth;
+				var heightHalf = 0.5 * innerHeight;
+				
+				//obj.updateMatrixWorld();				
+				vector.setFromMatrixPosition(obj.matrixWorld);
+				
+				
+				vector.project(viewer.camera);
+
+				vector.x = ( vector.x * widthHalf ) + widthHalf;
+				vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+				
+				return { 
+					x: vector.x,
+					y: vector.y,
+					z: vector.z,
+				};
+
+			};
+			
+			var currentPanorama;
+			function ChangePanorama(panorama){
+				currentPanorama = panorama;
+				HideInfospots(); 
+				$("#loading").fadeIn();
+				//$(".customhotspot").fadeOut();
+				setTimeout(function(){
+					viewer.setPanorama(window[panorama]);
+				}, 100);
+				setTimeout(function(){
+					$("#" + panorama).fadeIn();
+					$("#loading").fadeOut();
+				}, 1000);
+				
+			}
+			
+			
+			
+			function HideInfospots(){
+				$(".customhotspot").fadeOut();
+			}
+
+			/*customjs*//*customjs-end*/
+        </script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+
+		$(document).ready(function() {
+			$('#toggle').click(function() {
+			$('.sidebar').toggleClass('sidebar-hidden');
+			});
+
+			$('#getStartedBtn').click(function() {
+			window.location.href = "first-survey.html";
+			});
+			$('.ub-small-logo').css('cursor', 'pointer').click(function() {
+				window.location.href = "../../index.html";
+			});
+			$('.exit-btn').click(function() {
+			$('.facility-info-main-container, .facility-list-background').hide();
+			});
+		});
+		</script>
+		<script src="../view-panorama.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#gotoBA1').click(function() {
+					ChangePanorama('Afirstfloor');
+				});
+				$('#gotoBB1').click(function() {
+					ChangePanorama('BB1floor');
+				});
+				$('#gotoBC1').click(function() {
+					ChangePanorama('cfirstfloor');
+				});
+			});
+		</script>
+	</body>
+</html><!--customhtml--><div class='customhotspot' id='Afirstfloor'></div><div class='customhotspot' id='ub1ststep'></div><div class='customhotspot' id='ub2ndstep'></div><div class='customhotspot' id='BA1comlab'></div><div class='customhotspot' id='BA1testingroom'></div><div class='customhotspot' id='BA1mootcourt'></div><div class='customhotspot' id='BA2mid'></div><div class='customhotspot' id='BA3mid'></div><div class='customhotspot' id='buildingBentrance'></div><div class='customhotspot' id='BB1floor'></div><div class='customhotspot' id='library'></div><div class='customhotspot' id='BB2floor'></div><div class='customhotspot' id='BB3floor'></div><div class='customhotspot' id='canteenOutside'></div><div class='customhotspot' id='canteen'></div><div class='customhotspot' id='ubgymn'></div><div class='customhotspot' id='BCfirststep'></div><div class='customhotspot' id='BCsecondstep'></div><div class='customhotspot' id='BCentrance'></div><div class='customhotspot' id='cfirstfloor'></div><div class='customhotspot' id='BC2floor'></div><div class='customhotspot' id='BC3floor'></div><div class='customhotspot' id='BC4floor'></div><div class='customhotspot' id='regularroom'></div><div class='customhotspot' id='vivace'></div><div class='customhotspot' id='viaggio'></div><div class='customhotspot' id='tratoria'></div><div class='customhotspot' id='tieredhall'></div><div class='customhotspot' id='psychlab'></div><div class='customhotspot' id='netlab'></div><div class='customhotspot' id='mph'></div><div class='customhotspot' id='mmalab'></div><div class='customhotspot' id='hotkitchen'></div><div class='customhotspot' id='homeeconomics'></div><div class='customhotspot' id='homeeconomics3rCAu'></div><div class='customhotspot' id='edtech'></div><div class='customhotspot' id='drawinglab'></div><div class='customhotspot' id='drawinglab2'></div><div class='customhotspot' id='crimlab2'></div><div class='customhotspot' id='criminologylab1'></div><div class='customhotspot' id='crimesceneplaza'></div><div class='customhotspot' id='comlab5'></div><div class='customhotspot' id='coldkitchen'></div><div class='customhotspot' id='chemistrylab'></div><div class='customhotspot' id='cbi'></div><div class='customhotspot' id='biologylab'></div><div class='customhotspot' id='ballistic'></div><div class='customhotspot' id='avr'></div><!--customhtml-end-->undefined
