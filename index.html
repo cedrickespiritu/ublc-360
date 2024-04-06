@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles/main-style.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <title>UB 360</title>
+</head>
+<body>
+  <aside class="sidebar-container">
+    <div class="sidebar sidebar-hidden">
+      <div class="sidebar-logo-container">
+        <img src="img\ub360-logo.png" alt="" class="ub-small-logo">
+      </div>
+      <ul class="sidebar-menu">
+        <a href="index.html"><li class="sidebar-items">Home</li></a>
+        <a href="#"><li class="sidebar-items">Facility Tour</li></a>
+        <a href="#"><li class="sidebar-items">About Page</li></a>
+      </ul>
+    </div>
+  </aside>
+  <main class="main-container">
+    <div class="navbar-container">
+      <div class="ub360-logo-container">
+        <img src="img\ub360-logo.png" alt="" class="ub-small-logo">
+      </div>
+      <div class="sidebar-btn-container">
+        <svg viewBox="0 0 24 24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" id="toggle"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
+      </div>
+      <div class="desktop-navbar-container">
+        <ul class="navbar-menu">
+          <a href="index.html"><li class="navbar-items">Home</li></a>
+          <a href="#"><li class="navbar-items">Facility Tour</li></a>
+          <a href="#"><li class="navbar-items">About Page</li></a>
+        </ul>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="header-text-container">
+        <p class="header-text">Welcome to UBLC
+          Virtual Tour Experience</p>
+          <p class="subtitle-container">
+            An Interactive Website for UB Facilities
+          </p>
+      </div>
+      <div class="get-started-btn-container">
+        <button class="get-started-btn"  id="getStartedBtn" >Get Started</button>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    $('#toggle').click(function() {
+      $('.sidebar').toggleClass('sidebar-hidden');
+    });
+
+    $('#getStartedBtn').click(function() {
+      window.location.href = "first-survey.html";
+    });
+    $('.ub-small-logo').css('cursor', 'pointer').click(function() {
+      window.location.href = "index.html";
+    });
+  });
+</script>
+<script src="scripts/function.js"></script>
+</html>
