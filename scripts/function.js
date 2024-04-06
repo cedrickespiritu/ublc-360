@@ -29,7 +29,7 @@ $(document).ready(function() {
   // third survey function
   $(document).ready(function() {
     $('#goToFacilityCarousel').click(function() {
-      window.location.href = "../UB360-Website/facility-tour/facility-carousel.html";
+      window.location.href = "../facility-tour/facility-carousel.html";
     });
   });
 
